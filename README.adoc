@@ -1,0 +1,147 @@
+= Task 
+
+Paulo Borges
+
+.Run docker compose
+----
+docker-compose up -d
+----
+
+
+Alternative
+
+.Build and Run docker compose
+----
+docker-compose build
+docker-compose up -d
+----
+
+
+== Open Application (Frontend)
+
+* http://localhost:8000
+
+
+About
+
+* This is a PHP site, so all REST API call are done on server side
+* This app Use: vue, inertiajs to build dynamic (ajax base) pages
+
+
+== Developer OpenAPI (Backend)
+
+In production this can be 
+
+* Put behind firewal/gateway/reverse proxy or only be acessible by Frontend
+* Disabled: Swagger-ui
+
+* http://localhost:8080/
+
+
+=== REST API 
+
+
+.Organization Resource
+[width="100%",options="header,footer"]
+|====
+|Uri  |Request  |Response  |Description
+
+|/organization          |GET        |200  |Get organization collection
+|/organization/{id}     |POST       |201  |Create new organization  
+|/organization/{id}     |PUT        |204  |Update a organization  
+|/organization/{id}     |DELETE     |204  |Delete a organization by Id  
+|====
+
+
+* Hypermedia Application Language (HAL)
+* Link Relation (Link Rel)
+* OpenAPI 
+* Pagination, Filtering, Order
+* Json-Home 
+* Collection
+* Mediatype
+* Conditional Request "If-match"
+* E-tag
+
+.Link Relations
+
+* organization:list
+* organization:
+
+
+Common HTTP Status 
+
+* 200
+* 201
+* 202
+* 400 Bad Request 
+* 401 Unauthorized
+* 403 Forbidden
+* 404 
+* https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+
+
+== Design 
+
+[plantuml]
+----
+@startuml
+
+actor User
+
+component  Frontend as f
+
+component  Backend  as b
+
+database database as d
+
+
+User --> f
+
+f --> b
+
+b --> d
+
+@enduml
+----
+
+== Deployment on Docker (CI)
+
+Frontend Image
+
+* Docker as multi stage build, because this solution use node/npm to bundle web assets(js, css), but with don't need need on production image only at build stage.
+
+
+Backend Image
+
+* Docker as Multi stage 
+* Can improve to deploy native
+
+
+Mysql Image
+
+* version 8
+
+
+
+== Issues with composer on docker
+
+Create the docker file for Frontend (Laravel) take some time
+
+* If not passing "--prefer-source" it will break on docker
+
+* https://github.com/composer/composer/issues/8710
+* https://stackoverflow.com/questions/73479145/failed-to-solve-executor-failed-running-bin-sh-c-composer-install-exit-cod
+
+
+
+
+
+
+
+
+
+
+
+
+

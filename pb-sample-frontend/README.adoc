@@ -1,0 +1,101 @@
+= Frontend 
+
+Build with 
+
+* Laravel + InertiaJs + Vue + 
+* NodeJs + NPM + Vite
+
+
+== Developer
+
+
+.Terminal 1
+----
+php artisan serve
+----
+
+.Terminal 2
+----
+npm run dev
+----
+
+== Composer
+
+* composer install --prefer-dist --no-interaction --no-dev  --no-plugins --no-scripts --optimize-autoloader
+
+
+== Some usefull docker
+
+
+----
+docker build -t pb-sample-frontend  -f Dockerfile.apache .
+docker build -t pb-sample-frontend  . 
+----
+
+
+----
+docker run --rm -it pb-sample-frontend  bash
+docker run --rm pb-sample-frontend 
+docker image
+----
+
+----
+docker run -d --name pb-sample-frontend-run1 pb-sample-frontend 
+
+docker run -d -p 9090:80 --name pb-sample-frontend-run1 pb-sample-frontend 
+----
+
+
+----
+$ docker run -d -p 80:80 --name pb-sample-frontend-run1 -v "$PWD":/var/www/html php:8.2-apache-bullseye
+----
+
+
+----
+bash-4.4# ls -la vendor/
+bash-4.4# exit
+----
+
+
+----
+#RUN docker-php-ext-install pdo pdo_mysql sockets
+----
+
+== Docker satge - composer 
+
+----
+#
+# PHP Dependencies
+#
+FROM composer:2.5 as vendor
+
+RUN mkdir -p /tmp
+
+COPY database/ /tmp/database/
+COPY composer.json composer.lock /tmp/
+
+WORKDIR /tmp
+
+#RUN composer install --prefer-dist --no-interaction --no-dev  --no-plugins --no-scripts --optimize-autoloader
+#RUN composer install --prefer-dist --no-interaction --no-dev --optimize-autoloader 
+#RUN composer install --prefer-source --no-interaction --no-dev -o
+----
+
+
+
+== Tailwindcss
+
+
+.Install tailwindcss
+----
+npm install -save tailwindcss@3
+----
+
+
+./resources/css/app.css
+----
+@import "node_modules/font-awesome/css/font-awesome.min.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+----

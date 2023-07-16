@@ -1,0 +1,23 @@
+{
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "api:rm": "rimraf openapi/backend",
+        "api:gen": "openapi-generator-cli generate -g php -i http://localhost:8080/q/openapi -o  openapi/backend --skip-validate-spec --additional-properties apiPackage=Api --additional-properties invokerPackage=Backend\\Client --additional-properties packageName=OrgClient"
+    },
+    "devDependencies": {
+        "axios": "^1.1.2",
+        "laravel-vite-plugin": "^0.7.5",
+        "vite": "^4.0.0"
+    },
+    "dependencies": {
+        "@inertiajs/vue3": "^1.0.9",
+        "@openapitools/openapi-generator-cli": "^2.6.0",
+        "@vitejs/plugin-vue": "^4.2.3",
+        "rimraf": "^5.0.1",
+        "vue": "^3.3.4",
+        "wingcss": "^1.0.0-beta"
+    }
+}

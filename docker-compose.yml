@@ -1,0 +1,57 @@
+version: '3.8'
+services:
+  frontend:
+    container_name: pbapp_frontend
+    build:
+      context: ./pb-sample-frontend
+      dockerfile: Dockerfile
+    volumes:
+      - .:/pb-sample-frontend
+    ports:
+      - 8000:80
+    depends_on:
+      - backend
+    networks:
+      - pb_sample_net
+
+
+  backend:
+    container_name: pbapp_backend
+    build:
+      context: ./pb-sample-backend
+      dockerfile: src/main/docker/Dockerfile.jvm
+    volumes:
+      - .:/pb-sample-backend
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    networks:
+      - pb_sample_net
+
+
+  db:
+    platform: linux/x86_64
+    image: mysql:8.0
+    container_name: pbapp_database
+    environment:
+      MYSQL_ROOT: "root"
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "pbsample"
+      MYSQL_USER: "pbsample"
+      MYSQL_PASSWORD: "pbsample"
+    volumes:
+      - db:/var/lib/mysql
+    #ports:
+    #  - 3306:3306
+    networks:
+      - pb_sample_net
+
+
+volumes:
+  db:
+    driver: local
+
+networks:
+  pb_sample_net:
+    driver: bridge
