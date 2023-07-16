@@ -2,13 +2,6 @@
 
 
 
-cd C:\DEV\KriolOS\kriolos-opos-ideias\kriolos-opos-webapp
-
-C:\Java\graalvm-ce-java17-22.3.0
-C:\Java\graalvm-svm-java17-windows-gluon-22.1.0.1-Final
-
-$env:JAVA_HOME="C:\Java\graalvm-ce-java17-22.3.0"
-set "JAVA_HOME=C:\Java\graalvm-ce-java17-22.3.0"
 == Usefull Links and dev tips
 
 * http://localhost:8080/q/openapi?format=json
@@ -18,13 +11,6 @@ set "JAVA_HOME=C:\Java\graalvm-ce-java17-22.3.0"
 ----
 $ curl http://localhost:8080/q/openapi
 ----
-
-
-----
-GRAALVM_HOME=
-----
-
-
 
 
 .Generate Jar executable
@@ -184,4 +170,9 @@ set "GRAALVM_HOME=C:\Java\graalvm-ce-java17-22.3.0"
 set "PATH=%GRAALVM_HOME%\bin;%PATH%"
 
 quarkus build --native
+----
+
+
+----
+$env:GRAALVM_HOME="C:\Java\graalvm-ce-java17-22.3.0"
 ----
